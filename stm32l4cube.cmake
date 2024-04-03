@@ -5,17 +5,24 @@
 # - SHARC::HAL
 # - SHARC::FATFS
 set(STM32CUBEL4_HAL_INCLUDE_DIRECTORIES
-	${CMAKE_SOURCE_DIR}/stm32l4xx_hal_driver/Inc
-	${CMAKE_SOURCE_DIR}/stm32l4xx_hal_driver/Inc/Legacy
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/STM32L4xx_HAL_Driver/Inc
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy
+	${CMAKE_SOURCE_DIR}/Inc/STM32CubeL4/Drivers/CMSIS/Core/Include
+	${CMAKE_SOURCE_DIR}/Inc/STM32CubeL4/Drivers/CMSIS/Device/ST/STM32L4xx/Include
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/CMSIS/Device/ST/STM32L4xx/Include
+	${CMAKE_SOURCE_DIR}/Inc
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/CMSIS/Device/ST/STM32L4xx/Include
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/CMSIS/Include
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/CMSIS/DSP/Include
 )
 
 file(GLOB STM32CUBEL4_HAL_SOURCES
-	${CMAKE_SOURCE_DIR}/stm32l4xx_hal_driver/Src/stm32l4xx_hal_i2c.c
-	${CMAKE_SOURCE_DIR}/stm32l4xx_hal_driver/Src/stm32l4xx_hal_i2c_ex.c
-	${CMAKE_SOURCE_DIR}/stm32l4xx_hal_driver/Src/stm32l4xx_hal_gpio.c
-	${CMAKE_SOURCE_DIR}/stm32l4xx_hal_driver/Src/stm32l4xx_hal_uart.c
-	${CMAKE_SOURCE_DIR}/stm32l4xx_hal_driver/Src/stm32l4xx_hal_uart_ex.c
-	${CMAKE_SOURCE_DIR}/stm32l4xx_hal_driver/Src/stm32l4xx_hal.c
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c
+	${CMAKE_SOURCE_DIR}/STM32CubeL4/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c
 )
 
 # Workaround - Broken template files should not be compiled.

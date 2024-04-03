@@ -17,15 +17,24 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
+#ifdef __cplusplus 
+extern "C" {
+#endif
+#include "ICM20649.h"
+#include "main.h"
 #include <stdarg.h>
 #include "stdio.h"
 #include "string.h"
 #include "math.h"
-#include "ICM20649.h"
+#ifdef __cplusplus 
+}
+#endif
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -279,7 +288,7 @@ int main(void)
 
 
 
-
+  fifo_sample_count == 1
 
    while (1)
   {
