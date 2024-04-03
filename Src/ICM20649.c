@@ -9,7 +9,7 @@
 
 #include <ICM20649.h>
 
-//======================== 2. Global Variables =====================================================
+//======================== 2. Variables =====================================================
 
 uint8_t I2C_TX_CPLT;	//Flag signaling completion of I2C DMA transfer
 
@@ -22,10 +22,19 @@ uint32_t fifo_sample_complete;   //Current FIFO sample is complete
 uint8_t IMU_Log_On;			 //used in EXTI IRQ to determine what routine to run
 
 uint32_t loopTime;
+//============================ 3. Data Buffers ============================================
 
 uint8_t IMU_Buffer[N_SAMPLES*12];	//Buffer to store data from the IMU
 
 uint8_t FIFO_Buffer[N_SAMPLES*12];	//Buffer to store data from the IMU
+
+//======================== 4. Handlers ===========================================
+
+I2C_HandleTypeDef hi2c1;
+
+DMA_HandleTypeDef hdma_i2c1_rx;
+
+DMA_HandleTypeDef hdma_i2c1_tx;
 
 //======================== 4. Static Functions Prototypes ===========================================
 
