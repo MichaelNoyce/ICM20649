@@ -288,7 +288,7 @@ int main(void)
 
 
 
-  fifo_sample_count == 1
+  fifo_sample_count == 1;
 
    while (1)
   {

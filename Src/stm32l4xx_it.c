@@ -22,7 +22,7 @@
 #include "stm32l4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "HAL_ICM20649.h"
+#include "ICM20649.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

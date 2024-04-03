@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22...3.27)
 
 project(ICM20649)
 
-set(LIBRARY ${PROJECT_NAME})
+set(TARGET_EXECUTABLE ${CMAKE_PROJECT_NAME})
 
 enable_language(C CXX ASM)
 
@@ -13,21 +13,24 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
-add_library(${LIBRARY} STATIC
-	Src/ICM20649.c
-)
-
-target_include_directories(${LIBRARY} PUBLIC
-	Inc
-)
-
 include(stm32l4cube.cmake)
-target_link_libraries(${LIBRARY} PUBLIC STM32CUBEL4_HAL)
-
 
 if(CMAKE_CROSSCOMPILING)
 	include(CMake/scripts.cmake)
 	include(CMake/mcu.cmake)
+
+	file(GLOB_RECURSE APPLICATION_SOURCES
+		${CMAKE_SOURCE_DIR}/Src/*.c
+	)
+
+	add_executable(${TARGET_EXECUTABLE}
+		${APPLICATION_SOURCES}
+		${STARTUP_SCRIPT}
+	)
+
+	target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
+	Inc
+)
 
 	set(CROSSCOMPILE_C_OPTIONS
 		-fdata-sections
@@ -54,6 +57,8 @@ if(CMAKE_CROSSCOMPILING)
 		"$<$<CONFIG:Debug>:${CROSSCOMPILE_OPTIMISATION_OPTIONS_DEBUG}>"
 		"$<$<CONFIG:RelWithDebInfo>:${CROSSCOMPILE_OPTIMISATION_OPTIONS_RELWITHDEBINFO}>"
 	)
+
+	target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC STM32CUBEL4_HAL)
 
 	add_compile_definitions(
 		$<$<CONFIG:Debug>:DEBUG>
