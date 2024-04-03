@@ -42,7 +42,7 @@
 //========================== 2. Structs & Enums ===========================================
 
 /*
- * ICM_20689_Register_t
+ * ICM_20649_Register_t
  *
  * Complete 8-bit Register Map of the ICM20649 chip.
  */
@@ -131,7 +131,7 @@ typedef enum
 	TEMP_CONFIG = 0X53,
 	MOD_CTRL_USR = 0X54,
 
-}ICM_20689_Register_t;
+}ICM_20649_Register_t;
 
 /*
  * IMU_Status_t
@@ -459,7 +459,7 @@ typedef struct
 #define N_SAMPLES 1
 #define SAMPLE_SIZE 12 //12 bytes per sample ax ay az gx gy gz
 #define IMU_BUFFER_SIZE N_SAMPLES*SAMPLE_SIZE
-#define WAVELOGBUFNO 100 //Number of local buffers written to each wavelog file 5min*60sec*100Hz
+#define WAVELOGBUFNO 30000 //Number of local buffers written to each wavelog file 5min*60sec*100Hz
 #define WAVELOGNO 5 //Number of wave logs
 
 
@@ -477,33 +477,29 @@ typedef struct
 
 //========================== 4. Global Variables ==========================================
 
-uint32_t imu_sample_count;   //Keeps track of the number of samples from the IMU
+extern uint32_t imu_sample_count;   //Keeps track of the number of samples from the IMU
 
-uint32_t fifo_sample_count;   //Keeps track of the number of samples in the FIFO Buffer
+extern uint32_t fifo_sample_count;   //Keeps track of the number of samples in the FIFO Buffer
 
-uint32_t fifo_sample_complete;   //Current FIFO sample is complete
+extern uint32_t fifo_sample_complete;   //Current FIFO sample is complete
 
-uint32_t waveLogNo;
+extern uint8_t IMU_Log_On;			 //used in EXTI IRQ to determine what routine to run
 
-uint32_t waveDirNo;
-
-uint8_t IMU_Log_On;			 //used in EXTI IRQ to determine what routine to run
-
-uint32_t loopTime;
+extern uint32_t loopTime;
 //============================= 5. Handlers ===============================================
 
-I2C_HandleTypeDef hi2c1;
+extern I2C_HandleTypeDef hi2c1;
 
-DMA_HandleTypeDef hdma_i2c1_rx;
+extern DMA_HandleTypeDef hdma_i2c1_rx;
 
-DMA_HandleTypeDef hdma_i2c1_tx;
+extern DMA_HandleTypeDef hdma_i2c1_tx;
 
 
 //============================ 6. Data Buffers ============================================
 
-uint8_t IMU_Buffer[N_SAMPLES*12];	//Buffer to store data from the IMU
+extern uint8_t IMU_Buffer[N_SAMPLES*12];	//Buffer to store data from the IMU
 
-uint8_t FIFO_Buffer[N_SAMPLES*12];	//Buffer to store data from the IMU
+extern uint8_t FIFO_Buffer[N_SAMPLES*12];	//Buffer to store data from the IMU
 
 //======================== 8. Sensor Configuration Functions =========================================
 

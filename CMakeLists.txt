@@ -17,14 +17,13 @@ add_library(${LIBRARY} STATIC
 	Src/ICM20649.c
 )
 
-set(CMAKE_CROSSCOMPILING FALSE) #Make this into a command line argument
-
 target_include_directories(${LIBRARY} PUBLIC
 	Inc
 )
 
 include(stm32l4cube.cmake)
 target_link_libraries(${LIBRARY} PUBLIC STM32CUBEL4_HAL)
+
 
 if(CMAKE_CROSSCOMPILING)
 	include(CMake/scripts.cmake)
@@ -91,6 +90,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 
 	set(TEST_EXECUTABLE ${PROJECT_NAME}_Test)
 
+	# Incomplete - need to change framework to FFF from GTest to stub c functions 
 	add_executable(${TEST_EXECUTABLE}
 		Test/ICM20649.test.cpp
 	)

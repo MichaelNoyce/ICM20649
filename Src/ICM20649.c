@@ -9,11 +9,25 @@
 
 #include <ICM20649.h>
 
-//======================== 2. Private Variables =====================================================
+//======================== 2. Global Variables =====================================================
 
 uint8_t I2C_TX_CPLT;	//Flag signaling completion of I2C DMA transfer
 
-//======================== 3. Static Functions Prototypes ===========================================
+uint32_t imu_sample_count;   //Keeps track of the number of samples from the IMU
+
+uint32_t fifo_sample_count;   //Keeps track of the number of samples in the FIFO Buffer
+
+uint32_t fifo_sample_complete;   //Current FIFO sample is complete
+
+uint8_t IMU_Log_On;			 //used in EXTI IRQ to determine what routine to run
+
+uint32_t loopTime;
+
+uint8_t IMU_Buffer[N_SAMPLES*12];	//Buffer to store data from the IMU
+
+uint8_t FIFO_Buffer[N_SAMPLES*12];	//Buffer to store data from the IMU
+
+//======================== 4. Static Functions Prototypes ===========================================
 
 static void MX_DMA_Init(void);
 
@@ -21,7 +35,15 @@ static HAL_StatusTypeDef  MX_I2C1_Init(void);
 
 static void MX_GPIO_Init(void);
 
-//======================== 3. Static Functions Definition ===========================================
+//======================== 5. Handlers =====================================================
+
+I2C_HandleTypeDef hi2c1;
+
+DMA_HandleTypeDef hdma_i2c1_rx;
+
+DMA_HandleTypeDef hdma_i2c1_tx;
+
+//======================== 6. Static Functions Definition ===========================================
 
 /**
   * @brief I2C1 Initialization Function
@@ -161,7 +183,7 @@ imu_status_t ICM20649_Init_IMU(uint8_t g_fsr, uint8_t a_fsr, uint8_t dlpf_acc_co
 
 	//Initialise Peripherals
 	MX_DMA_Init();
-	if(MX_I2C1_Init() != HAL_OK) return IMU_PERIPHERAL_INIT_ERROR;
+	//if(MX_I2C1_Init() != HAL_OK) return IMU_PERIPHERAL_INIT_ERROR;
 	MX_GPIO_Init();
 
 	//reset buffers and flags
