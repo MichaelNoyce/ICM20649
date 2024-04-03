@@ -458,7 +458,6 @@ imu_status_t ICM20649_Set_Sample_Rate(I2C_HandleTypeDef *hi2c)
 	if((configbyte &0b1) > 0)
 	{
 		smplrtdiv= (uint8_t)(GYRO_OUTPUT_RATE_DLPF_EN/SAMPLE_RATE - 1);
-		printmsg("Gyro DPLF Enabled! \r\n");
 	}else
 	{
 		smplrtdiv = (uint8_t)(GYRO_OUTPUT_RATE_DLPF_DIS/SAMPLE_RATE -1);
@@ -469,8 +468,6 @@ imu_status_t ICM20649_Set_Sample_Rate(I2C_HandleTypeDef *hi2c)
 	{
 		return IMU_I2C_ERROR;
 	}
-
-	printmsg("Gyro smplrt: %d \r\n", smplrtdiv);
 
 	configbyte = 0;
 	smplrtdiv = 0;
